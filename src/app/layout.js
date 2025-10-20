@@ -13,8 +13,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        {children}
+        <main>
+          <Header />
+          <div className="h-screen bg-gray-100 p-5">{children}</div>
+        </main>
       </body>
     </html>
   );
