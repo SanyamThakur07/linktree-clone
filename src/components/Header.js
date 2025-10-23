@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { LogoutButton } from "./buttons/LogoutButton";
 import { Button } from "./ui/button";
+import { FaLink } from "react-icons/fa6";
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
@@ -10,7 +11,8 @@ export default async function Header() {
     <header className="mx-auto max-w-screen-2xl border-b px-5 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-10">
-          <Link href={"/"}>
+          <Link href={"/"} className="flex items-center gap-2 text-blue-600">
+            <FaLink className="size-6" />
             <span className="text-lg font-bold">LinkList</span>
           </Link>
           <nav className="flex items-center gap-6 font-medium text-slate-500">
