@@ -28,8 +28,8 @@ export const LogoutButton = () => {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="outline" className="ml-3">
-          <span> Logout</span>
           <MdLogout />
+          <span> Logout</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

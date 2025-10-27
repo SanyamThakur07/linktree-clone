@@ -5,9 +5,10 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import grabUsername from "@/actions/grabUsername";
 import { useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export const UsernameForm = ({ desiredUsername }) => {
+  const router = useRouter();
   const [taken, setTaken] = useState(false);
 
   async function handleSubmit(formData) {
@@ -16,7 +17,7 @@ export const UsernameForm = ({ desiredUsername }) => {
     setTaken(result === false);
 
     if (result) {
-      redirect("/account?created=" + formData.get("username"));
+      router.push("/account?created=" + formData.get("username"));
     }
   }
   return (
@@ -34,7 +35,7 @@ export const UsernameForm = ({ desiredUsername }) => {
           className="mt-7 w-full"
         />
         {taken && (
-          <p className="w-full rounded-sm bg-red-300 p-2 text-center font-medium">
+          <p className="w-full rounded-sm bg-red-200 p-2 text-center font-medium">
             Username is taken
           </p>
         )}

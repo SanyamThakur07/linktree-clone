@@ -23,12 +23,12 @@ export default async function Header() {
         </div>
         <div className="flex items-center">
           {!!session && (
-            <>
+            <Link href={"/account"}>
               <span className="text-muted-foreground">
                 Hello, {session.user.name}
               </span>
               <LogoutButton />
-            </>
+            </Link>
           )}
           {!session && (
             <Link href={"/login"}>
