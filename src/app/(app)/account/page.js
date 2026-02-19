@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 
 export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
-  const desiredUsername = (await searchParams).desiredUsername;
+  const { desiredUsername } = await searchParams;
   if (!session) {
     redirect("/");
   }
@@ -15,12 +15,8 @@ export default async function AccountPage({ searchParams }) {
   mongoose.connect(process.env.MONGO_URI);
   const page = await Page.findOne({ owner: session.user.email });
 
-  if(page){
-    return (
-      <div>
-        Hi are you there it's my page;
-      </div>
-    )
+  if (page) {
+    return <div>Hi are you there its my page;</div>;
   }
   return (
     <div>

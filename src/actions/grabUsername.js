@@ -15,9 +15,13 @@ export default async function grabUsername(formData) {
     return false;
   } else {
     const session = await getServerSession(authOptions);
-    await Page.create({
+    const newPage = await Page.create({
       uri: username,
       owner: session?.user?.email,
     });
+    return {
+      uri: newPage.uri,
+      owner: newPage.owner,
+    };
   }
 }

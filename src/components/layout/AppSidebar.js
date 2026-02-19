@@ -13,7 +13,7 @@ export default function AppSidebar() {
       <div className="mx-auto mt-10 flex flex-col items-center justify-center gap-2">
         <Link
           href={"/account"}
-          className={`flex items-center gap-2 rounded-md px-4 py-2 transition-colors ${
+          className={`flex items-center gap-2 rounded-md px-6 py-2 transition-colors ${
             path === "/account"
               ? "text-blue-500"
               : "text-gray-500 hover:bg-gray-100"
@@ -24,7 +24,7 @@ export default function AppSidebar() {
         </Link>
         <Link
           href={"/analytics"}
-          className={`flex items-center gap-2 rounded-md px-4 py-2 transition-colors ${
+          className={`flex items-center gap-2 rounded-md px-6 py-2 transition-colors ${
             path === "/analytics"
               ? "text-blue-500"
               : "text-gray-500 hover:bg-gray-100"

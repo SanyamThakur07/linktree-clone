@@ -8,7 +8,7 @@ import { FaLink } from "react-icons/fa6";
 export default async function Header() {
   const session = await getServerSession(authOptions);
   return (
-    <header className="mx-auto max-w-screen-2xl border-b px-5 py-3">
+    <header className="max-w-screen-2xl border-b px-5 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-10">
           <Link href={"/"} className="flex items-center gap-2 text-blue-600">
@@ -22,13 +22,15 @@ export default async function Header() {
           </nav>
         </div>
         <div className="flex items-center">
-          {!!session && (
-            <Link href={"/account"}>
-              <span className="text-muted-foreground">
-                Hello, {session.user.name}
-              </span>
+          {session && (
+            <>
+              <Link href={"/account"}>
+                <span className="text-muted-foreground">
+                  Hello, {session.user.name}
+                </span>
+              </Link>
               <LogoutButton />
-            </Link>
+            </>
           )}
           {!session && (
             <Link href={"/login"}>

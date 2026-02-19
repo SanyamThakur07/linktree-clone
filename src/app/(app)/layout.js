@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import AppSidebar from "@/components/layout/AppSidebar";
+import { Page } from "@/models/Page";
+import mongoose from "mongoose";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,20 +15,29 @@ export const metadata = {
 
 export default async function AppLayout({ children }) {
   const session = await getServerSession(authOptions);
+
+  let page = null;
+  if (session) {
+    mongoose.connect(process.env.MONGO_URI);
+    page = await Page.findOne({ owner: session.user.email });
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
         <main className="flex min-h-screen">
-          <div className="flex w-48 flex-col bg-white p-4 shadow">
-            <Image
-              src={session?.user?.image}
-              alt={"avataar"}
-              width={80}
-              height={60}
-              className="mx-auto my-8 rounded-full"
-            />
-            <AppSidebar />
-          </div>
+          {page && (
+            <div className="flex w-48 flex-col bg-white p-4 shadow">
+              <Image
+                src={session?.user?.image}
+                alt={"avataar"}
+                width={80}
+                height={60}
+                className="mx-auto my-8 rounded-full"
+              />
+              <AppSidebar />
+            </div>
+          )}
           <div className="flex-1 bg-gray-100 p-5">{children}</div>
         </main>
       </body>
