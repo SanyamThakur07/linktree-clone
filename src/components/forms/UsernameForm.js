@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { FaLink } from "react-icons/fa6";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import grabUsername from "@/actions/grabUsername";
@@ -11,7 +12,9 @@ export const UsernameForm = ({ desiredUsername }) => {
   const router = useRouter();
   const [taken, setTaken] = useState(false);
 
-  async function handleSubmit(formData) {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const result = await grabUsername(formData);
 
     setTaken(result === false);
@@ -21,29 +24,61 @@ export const UsernameForm = ({ desiredUsername }) => {
     }
   }
   return (
-    <form
-      action={handleSubmit}
-      className="flex items-center justify-center pt-20"
-    >
-      <div className="flex max-w-md flex-col items-center gap-2 rounded-sm border bg-white p-6">
-        <h1 className="text-2xl font-bold">Grab your user name</h1>
-        <h2 className="text-muted-foreground text-sm">Choose your username</h2>
-        <Input
-          name="username"
-          defaultValue={desiredUsername}
-          placeholder="username"
-          className="mt-7 w-full"
-        />
-        {taken && (
-          <p className="w-full rounded-sm bg-red-200 p-2 text-center font-medium">
-            Username is taken
+    <div className="flex min-h-[80vh] flex-col items-center justify-center">
+      <div className="w-full max-w-md">
+        <div className="mb-8 text-center">
+          <div className="mb-4 flex justify-center">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100">
+              <FaLink className="size-6 text-blue-600" />
+            </div>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            Claim your username
+          </h1>
+          <p className="mt-2 text-gray-500">
+            Choose a unique username for your link page
           </p>
-        )}
-        <Button type="submit" className="w-full font-medium">
-          <span>Claim your username</span>
-          <ArrowRight />
-        </Button>
+        </div>
+
+        <div className="rounded-xl border border-gray-200 bg-white p-8 shadow-lg">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                Username
+              </label>
+              <div className="flex items-center rounded-lg border-2 border-gray-200 bg-white focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
+                <span className="pl-3 text-sm font-medium text-gray-500">
+                  linklist.to/
+                </span>
+                <Input
+                  name="username"
+                  defaultValue={desiredUsername}
+                  placeholder="username"
+                  className="border-0 bg-transparent focus:ring-0 focus:outline-none"
+                />
+              </div>
+            </div>
+
+            {taken && (
+              <p className="rounded-md bg-red-50 p-3 text-center text-sm font-medium text-red-600">
+                Username is already taken. Please try another.
+              </p>
+            )}
+
+            <Button
+              type="submit"
+              className="flex w-full items-center justify-center gap-2 bg-blue-600 py-3 font-medium text-white transition-colors hover:bg-blue-700"
+            >
+              <span>Claim username</span>
+              <ArrowRight className="size-4" />
+            </Button>
+          </form>
+        </div>
+
+        <p className="mt-6 text-center text-sm text-gray-400">
+          Your page will be available at linklist.to/yourusername
+        </p>
       </div>
-    </form>
+    </div>
   );
 };
