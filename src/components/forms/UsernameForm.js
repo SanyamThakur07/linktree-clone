@@ -46,7 +46,7 @@ export const UsernameForm = ({ desiredUsername }) => {
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 Username
               </label>
-              <div className="flex items-center rounded-lg border-2 border-gray-200 bg-white focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100">
+              <div className="flex items-center rounded-lg border-2 border-gray-200 bg-white focus-within:border-blue-500">
                 <span className="pl-3 text-sm font-medium text-gray-500">
                   linklist.to/
                 </span>
@@ -54,7 +54,7 @@ export const UsernameForm = ({ desiredUsername }) => {
                   name="username"
                   defaultValue={desiredUsername}
                   placeholder="username"
-                  className="border-0 bg-transparent focus:ring-0 focus:outline-none"
+                  className="border-0 bg-transparent focus-visible:ring-0 focus-visible:outline-none"
                 />
               </div>
             </div>
